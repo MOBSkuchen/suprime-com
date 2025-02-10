@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/s/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suprime Sonvogel</title>
+</head>
+<body>
+    <div class="top-bar">
+        <nav>
+          <a href="/a/netpup">Netpup</a>
+        </nav>
+    </div>
+      
+    <h1>Suprime Sonvogel</h1>
+    <h3>We are a company</h3>
+    <h2 id="target"></h2>
+</body>
+</html>
+
+
+<script>
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+var i = 0;
+var speed = 50;
+
+var texts = [
+    "Create",
+    "Develop",
+    "Maintain",
+    "Improve",
+    "Effective",
+    "Blazingly fast",
+    "Transparent"
+]
+
+var x = Math.floor(Math.random() * texts.length);
+console.log(x);
+var txt = texts[x];
+
+function switchText() {
+    if (x >= texts.length-1) {
+        x = 0
+    } else {
+        x++;
+    }
+    txt = texts[x];
+}
+
+function typeWriterA() {
+  if (i <= txt.length) {
+    sleep(speed).then(() => {
+        if (i != -1) {
+            document.getElementById("target").innerHTML = txt.slice(0, i);
+        }
+        i++;
+        typeWriterA();
+    })
+  } else {
+    sleep(speed * 50).then(() => {
+        typeWriterB();
+    })
+  }
+}
+
+function typeWriterB() {
+  if (i >= 0) {
+    sleep(speed).then(() => {
+        if (i != -1) {
+            document.getElementById("target").innerHTML = txt.slice(0, i);
+        }
+        i--;
+        typeWriterB();
+    })
+  } else {
+    sleep(speed * 2).then(() => {
+        switchText();
+        typeWriterA();
+    })
+  }
+}
+
+typeWriterA();
+</script>
